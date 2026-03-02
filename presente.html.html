@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leticia & Thiago ❤️</title>
+    <style>
+        /* FUNDO GRADIENTE AZUL ESTILO IPHONE */
+        body { 
+            margin: 0; 
+            background: radial-gradient(circle at top, #1a365d 0%, #000000 100%); 
+            color: white; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px;
+        }
+
+        .iphone-card { 
+            width: 360px; 
+            background: rgba(18, 18, 18, 0.9); 
+            border-radius: 30px; 
+            overflow: hidden; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        /* FOTO DE CAPA COM TÍTULO POR CIMA */
+        .cover-container { position: relative; width: 100%; height: 320px; }
+        .foto-capa { width: 100%; height: 100%; object-fit: cover; }
+        .foto-capa-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(to top, rgba(18,18,18,1), rgba(18,18,18,0) 50%);
+        }
+        .sobre-casal-txt { 
+            position: absolute; top: 20px; left: 20px; 
+            font-size: 14px; font-weight: bold; color: rgba(255,255,255,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .content { padding: 25px; text-align: center; }
+        
+        h1 { font-size: 22px; margin: 0; font-weight: 700; }
+        .sub-data { color: #888; font-size: 13px; margin-top: 5px; margin-bottom: 25px; }
+
+        /* GRADE DO TEMPORIZADOR FIELL À IMAGEM 1 */
+        .timer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; 
+            margin-bottom: 30px; 
+        }
+        .timer-box { 
+            background: #2a2a2a; 
+            padding: 15px 5px; 
+            border-radius: 12px; 
+            border: 1px solid #3a3a3a;
+        }
+        .timer-box .num { display: block; font-size: 24px; font-weight: 800; color: #5db0e5; }
+        .timer-box .label { display: block; font-size: 11px; color: #aaa; text-transform: uppercase; margin-top: 4px; }
+
+        /* SEGUNDA FOTO COMO CAPA DE ÁLBUM */
+        .segunda-foto { 
+            width: 100%; 
+            border-radius: 12px; 
+            object-fit: cover; 
+            margin-bottom: 25px; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .player-info { color: #5db0e5; font-size: 13px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        audio { width: 100%; height: 35px; margin-bottom: 25px; filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+
+        .btn { 
+            background: #5db0e5; 
+            color: black; 
+            padding: 14px; 
+            border-radius: 30px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: none; 
+            width: 100%; 
+            transition: 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        
+        .caixa-secreta { 
+            display: none; 
+            background-color: #5db0e5; 
+            color: black; 
+            padding: 25px; 
+            border-radius: 15px; 
+            margin-top: 25px; 
+            text-align: left;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="iphone-card">
+        <div class="cover-container">
+            <img src="foto.jpg" class="foto-capa" alt="Capa">
+            <div class="foto-capa-overlay"></div>
+            <div class="sobre-casal-txt">Sobre o casal</div>
+        </div>
+
+        <div class="content">
+            <h1>Leticia & Thiago ❤️</h1>
+            <div class="sub-data">desde 21/08/2025</div>
+
+            <div class="timer-grid">
+                <div class="timer-box"><span class="num" id="anos">0</span><span class="label">Anos</span></div>
+                <div class="timer-box"><span class="num" id="meses">0</span><span class="label">Meses</span></div>
+                <div class="timer-box"><span class="num" id="dias">0</span><span class="label">Dias</span></div>
+                <div class="timer-box"><span class="num" id="horas">0</span><span class="label">Horas</span></div>
+                <div class="timer-box"><span class="num" id="minutos">0</span><span class="label">Minutos</span></div>
+                <div class="timer-box"><span class="num" id="segundos">0</span><span class="label">Segundos</span></div>
+            </div>
+
+            <img src="segunda-foto.jpg" class="segunda-foto" alt="Nossa Foto">
+
+            <div class="player-info">Sacha Distel - La belle vie</div>
+            <audio id="meuAudio" controls><source src="musica.mp3" type="audio/mpeg"></audio>
+
+            <button class="btn" onclick="ativarTudo()">Vamos lá</button>
+
+            <div id="textoAzul" class="caixa-secreta">
+                Meu bem, Obrigado por estar comigo, por me amar do jeitinho que eu sou e por fazer tudo ser mais leve só por existir. Estar ao teu lado é a melhor parte dos meus dias. Te amo ❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dataInicio = new Date(2025, 7, 21, 0, 0, 0); // 21/08/2025
+
+        function atualizarContador() {
+            const agora = new Date();
+            let diff = agora - dataInicio;
+
+            // Cálculos complexos para tempo segmentado (Anos, Meses, Dias)
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+
+            if (dias < 0) {
+                meses--;
+                let ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+                dias += ultimoDiaMesAnterior;
+            }
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            // Exibição segmentada (0-59) para horas, minutos e segundos
+            document.getElementById('anos').innerText = anos;
+            document.getElementById('meses').innerText = meses;
+            document.getElementById('dias').innerText = dias;
+            document.getElementById('horas').innerText = agora.getHours();
+            document.getElementById('minutos').innerText = agora.getMinutes();
+            document.getElementById('segundos').innerText = agora.getSeconds();
+        }
+
+        function ativarTudo() {
+            document.getElementById('textoAzul').style.display = "block";
+            document.getElementById('meuAudio').play();
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+</body>
+</html>

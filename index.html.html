@@ -1,0 +1,23 @@
+function ativarTudo() {
+    // Mostra o texto secreto
+    document.getElementById('textoAzul').style.display = "block";
+    
+    // Toca a música
+    const player = document.getElementById('meuAudio');
+    player.play().catch(e => console.log("Erro na música:", e));
+
+    // Troca foto por vídeo
+    const foto = document.getElementById('minhaFoto');
+    const video = document.getElementById('meuVideo');
+    
+    foto.style.display = "none";
+    video.style.display = "block";
+    
+    // Força o carregamento e o play do vídeo
+    video.load(); 
+    video.play().catch(e => {
+        console.log("Erro no vídeo, tentando sem som:", e);
+        video.muted = true; // Se falhar com som, ele toca mudo
+        video.play();
+    });
+}
